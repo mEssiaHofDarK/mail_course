@@ -9,8 +9,8 @@ class Handler(tornado.web.RequestHandler):
         utm_source = self.get_argument('edugram_id')
         print(utm_source)
         self.write(utm_source)
-        self.flush()
-        self.finish()
+        await self.flush()
+        await self.finish()
 
 
 app = tornado.web.Application([
