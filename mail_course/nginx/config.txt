@@ -1,0 +1,15 @@
+error_log <path> <level>;
+http {
+    log_format simple '$remote_addr $request $status';
+    server {
+        listen <url>;
+        server_name <virtual_host>;
+        access_log <path> simple;
+        location / <> {
+            root <path>;
+        }
+        location <uri> {
+            root <path>;
+        }
+    }
+}
