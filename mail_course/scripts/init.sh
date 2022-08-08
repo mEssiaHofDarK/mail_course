@@ -5,7 +5,7 @@ mkdir -p /home/box/web/{public,uploads,etc} /home/box/web/public/{img,css,js}
 echo "working tree created! coping nginx.conf ..."
 cp /home/box/mail_course/mail_course/nginx/nginx.conf /home/box/web/etc
 echo "nginx.conf copied! creating config link ..."
-sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
+sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/
 echo "link created! restarting nginx ..."
 service nginx restart
 echo "init complete!"
