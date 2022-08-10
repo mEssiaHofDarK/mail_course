@@ -8,6 +8,6 @@ def app(environ, start_response):
             ('Content-type', 'text/plain')
         ]
         start_response(status, response_headers)
-        return iter(bytes(query.encode()))
+        return iter(bytes(query.encode('ascii')))
     except KeyError:
         return 1
