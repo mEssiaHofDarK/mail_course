@@ -1,5 +1,6 @@
 def app(environ, start_response):
     """Simplest possible application object"""
+    print(environ)
     try:
         query = bytes(environ.get('QUERY_STRING').replace('&', '\n'))
         print(environ.get('QUERY_STRING'))
