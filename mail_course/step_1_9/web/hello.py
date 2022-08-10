@@ -9,6 +9,6 @@ def app(environ, start_response):
             ('Content-Length', str(len(query)))
         ]
         start_response(status, response_headers)
-        return iter([bytes(query)])
+        return iter([query])
     except KeyError:
         return 1
