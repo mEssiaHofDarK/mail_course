@@ -1,7 +1,7 @@
 def app(environ, start_response):
     """Simplest possible application object"""
     try:
-        query = [arg + '\n' for arg in (environ.get('QUERY_STRING')).split('&')]
+        query = [bytes(arg + '\n') for arg in (environ.get('QUERY_STRING')).split('&')]
         print(query)
         # data = b'Hello, World!\n'
         status = '200 OK'
