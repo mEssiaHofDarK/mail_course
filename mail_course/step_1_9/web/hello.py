@@ -1,7 +1,8 @@
 def app(environ, start_response):
     """Simplest possible application object"""
     try:
-        query = (environ.get('QUERY_STRING')).replace('&', '\n')
+        query = [arg + '\n' for arg in (environ.get('QUERY_STRING')).split('&')]
+        print(f"{query = }")
         # data = b'Hello, World!\n'
         status = '200 OK'
         response_headers = [
