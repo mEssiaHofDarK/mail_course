@@ -1,6 +1,6 @@
 def app(environ, start_response):
     """Simplest possible application object"""
-    body = [bytes(i+'\n', 'utf-8') for i in environ['QUERY_STRING'].split('&')]
+    body = [b'Hello, World!\n']
     status = '200 OK'
     response_headers = [
         ('Content-type', 'text/plain')
