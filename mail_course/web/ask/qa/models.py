@@ -12,23 +12,23 @@ class QuestionManager(models.Manager):
 
 
 class Question(models.Model):
-    title = models.CharField(max_length=255)  # - заголовоквопроса
-    text = models.TextField()  # - полный текст вопроса
-    added_at = models.DateTimeField()  # - дата добавления вопроса
-    rating = models.IntegerField()  # - рейтинг вопроса(число)
-    author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)  # - автор вопроса
-    likes = models.ManyToManyField(to=User, related_name='question_likes')  # - список пользователей, поставивших "лайк"
-    objects = QuestionManager()  # - extended Manager()
+    title = models.CharField(max_length=255)
+    text = models.TextField()
+    added_at = models.DateTimeField()
+    rating = models.IntegerField()
+    author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
+    likes = models.ManyToManyField(to=User, related_name='question_likes')
+    objects = QuestionManager()
 
     class Meta:
         db_table = 'questions'
 
 
 class Answer(models.Model):
-    text = models.TextField()  # - текст ответа
-    added_at = models.DateTimeField()  # - дата добавления ответа
-    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)  # - вопрос, к которому относится ответ
-    author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)  # - автор ответа
+    text = models.TextField()
+    added_at = models.DateTimeField()
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'answers'
