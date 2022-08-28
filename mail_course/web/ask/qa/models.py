@@ -15,13 +15,13 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField()
-    rating = models.IntegerField()
+    rating = models.IntegerField(default=0)
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
     likes = models.ManyToManyField(to=User, related_name='question_likes')
     objects = QuestionManager()
 
-    class Meta:
-        db_table = 'questions'
+    # class Meta:
+    #     db_table = 'questions'
 
 
 class Answer(models.Model):
@@ -30,5 +30,5 @@ class Answer(models.Model):
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
 
-    class Meta:
-        db_table = 'answers'
+    # class Meta:
+    #     db_table = 'answers'
