@@ -17,7 +17,7 @@ class Question(models.Model):
     added_at = models.DateTimeField()  # - дата добавления вопроса
     rating = models.IntegerField()  # - рейтинг вопроса(число)
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)  # - автор вопроса
-    likes = models.ManyToManyField(to=User)  # - список пользователей, поставивших "лайк"
+    likes = models.ManyToManyField(to=User, related_name='question_likes')  # - список пользователей, поставивших "лайк"
     objects = QuestionManager()  # - extended Manager()
 
     class Meta:
