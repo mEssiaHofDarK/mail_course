@@ -10,8 +10,8 @@ sudo /etc/init.d/mysql start
 echo "create db 'ask' and django models..."
 mysql -u root -e "create database if not exists ask character set utf8;"
 mysql -u root -e "grant all privileges on ask.* to 'box'@'localhost' with grant option;"
-python3 ./web/aks/manage.py makemigrations
-python3 ./web/aks/manage.py migrate
+python3 /web/aks/manage.py makemigrations
+python3 /web/aks/manage.py migrate
 
 echo "configure nginx..."
 sudo ln -f /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/default
