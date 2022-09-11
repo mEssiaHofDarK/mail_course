@@ -14,7 +14,7 @@ class QuestionManager(models.Manager):
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    added_at = models.DateTimeField()
+    added_at = models.DateTimeField(blank=True, auto_now_add=True)
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
     likes = models.ManyToManyField(to=User, related_name='question_likes')
@@ -32,3 +32,4 @@ class Answer(models.Model):
 
     # class Meta:
     #     db_table = 'answers'
+# Failed test #4. Failed to create question model, check db connection
