@@ -56,7 +56,7 @@ def popular(request):
 
 def question(request, question_id: int):
     try:
-        quest = Question.objects.get(pk=question_id)[0]
+        quest = Question.objects.get(pk=question_id)
     except Question.DoesNotExist:
         raise Http404
     try:
