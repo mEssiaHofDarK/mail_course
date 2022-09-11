@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
-from models import Question, Answer
+from .models import Question, Answer
 
 
 def test(request, *args, **kwargs):
