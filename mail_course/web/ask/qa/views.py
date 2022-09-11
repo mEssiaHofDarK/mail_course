@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
-from django.urls import reverse
 from models import Question, Answer
 
 
