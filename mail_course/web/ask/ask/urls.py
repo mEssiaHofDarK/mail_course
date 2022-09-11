@@ -27,7 +27,7 @@ urlpatterns = [
     # url(r'admin/', admin.site.urls),
     url(r'^$', main, name='main'),
     url(r'^popular/', popular, name='popular'),
-    url(r'^question/[0-9]+/', question, name='question'),
+    url(r'^question/([0-9]+)/', question, name='question'),
     url(r'^ask/', test, name='test'),
     url(r'^new/', test, name='test'),
     url(r'^login/', test, name='test'),
