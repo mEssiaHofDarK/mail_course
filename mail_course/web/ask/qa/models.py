@@ -18,13 +18,19 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(to=User, null=True, on_delete=models.SET_NULL)
     likes = models.ManyToManyField(to=User, related_name='question_likes')
+
     objects = QuestionManager()
+
+    def __unicode__(self):
+        return self.title
 
     # class Meta:
     #     db_table = 'questions'
 
 
 class Answer(models.Model):
+    objects = models.Manager()
+
     text = models.TextField()
     added_at = models.DateTimeField()
     question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
@@ -32,4 +38,3 @@ class Answer(models.Model):
 
     # class Meta:
     #     db_table = 'answers'
-# Failed test #4. Failed to create question model, check db connection
