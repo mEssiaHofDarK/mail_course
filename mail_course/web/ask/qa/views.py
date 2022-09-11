@@ -44,7 +44,7 @@ def popular(request):
     except ValueError:
         raise Http404
     paginator = Paginator(questions, limit)
-    paginator.baseurl = '/popular/?page='
+    paginator.baseurl = '/popular?page='
     page = paginator.page(page)
     context = {
         'questions': page.object_list,
