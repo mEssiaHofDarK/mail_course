@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Popular</title>
 </head>
+{% csrf_token %}
 <nav>
     <ul class="pagination">
         {% for p in paginator.page_range %}

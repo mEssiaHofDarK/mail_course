@@ -21,6 +21,7 @@ from qa.views import (
     main,
     popular,
     question,
+    ask,
 )
 
 urlpatterns = [
@@ -28,7 +29,7 @@ urlpatterns = [
     url(r'^$', main, name='main'),
     url(r'^popular/', popular, name='popular'),
     url(r'^question/([0-9]+)/', question, name='question'),
-    url(r'^ask/', test, name='test'),
+    url(r'^ask/', ask, name='ask'),
     url(r'^new/', test, name='test'),
     url(r'^login/', test, name='test'),
     url(r'^signup/', test, name='test'),

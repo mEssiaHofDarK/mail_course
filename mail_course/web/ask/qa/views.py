@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.core.paginator import Paginator
 from .models import Question, Answer
+from .forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
@@ -55,6 +56,12 @@ def popular(request):
 
 
 def question(request, question_id: int):
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            redirect_to = '/question/' + str(question_id)
+            return HttpResponseRedirect(redirect_to=redirect_to)
     try:
         quest = Question.objects.get(pk=question_id)
     except Question.DoesNotExist:
@@ -66,6 +73,22 @@ def question(request, question_id: int):
     context = {
         'question': quest,
         'answers': answers,
+        'form': AnswerForm(),
     }
     return render(request=request, template_name='question.html', context=context)
+
+
+def ask(request):
+    if request.method == 'GET':
+        form = AskForm()
+    elif request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            quest = form.save()
+            redirect_to = '/question/' + str(quest.id)
+            return HttpResponseRedirect(redirect_to=redirect_to)
+    else:
+        raise HttpResponseForbidden
+    context = {'form': form}
+    return render(request=request, template_name='ask.html', context=context)
 

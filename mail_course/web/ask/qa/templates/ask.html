@@ -2,20 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Question</title>
+    <title>Main</title>
 </head>
 {% csrf_token %}
 <body>
-    <h2>{{ question.title }}</h2>
-    <p>{{ question.author }}</p>
-    <p>{{ question.text }}</p>
-    <br>
-    {% for answer in answers %}
-        <h3>{{ answer.author }}</h3>
-        <p>{{ answer.text }}</p>
-        <br>
-    {% endfor %}
-    <form method="post" action="/question/{{ question.id }}">
+    <form method="post" action="/ask">
         {% for field in form %}
             <div class="control-group{% if field.errors %}has-error{% endif %}">
                 <label class="control-label">{{ field.label }}</label>
@@ -28,3 +19,6 @@
     </form>
 </body>
 </html>
+
+
+
