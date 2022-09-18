@@ -102,10 +102,10 @@ def signup(request):
     elif request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            form.save()
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
-            if user is None:
-                user = form.save()
-            login(request, user)
+            if user is not None:
+                login(request, user)
             redirect_to = '/'
             return HttpResponseRedirect(redirect_to=redirect_to)
     else:
