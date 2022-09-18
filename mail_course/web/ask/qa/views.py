@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.core.paginator import Paginator
+from django.contrib.auth import authenticate, login
 from .models import Question, Answer
-from .forms import AskForm, AnswerForm
+from .forms import AskForm, AnswerForm, SignUpForm, LoginForm
 
 
 def test(request, *args, **kwargs):
@@ -58,6 +59,7 @@ def popular(request):
 def question(request, question_id: int):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             form.save()
             redirect_to = '/question/' + str(question_id)
@@ -83,6 +85,7 @@ def ask(request):
         form = AskForm()
     elif request.method == 'POST':
         form = AskForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             quest = form.save()
             redirect_to = '/question/' + str(quest.id)
@@ -94,8 +97,35 @@ def ask(request):
 
 
 def signup(request):
-    ...
+    if request.method == 'GET':
+        form = SignUpForm()
+    elif request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.username, password=form.password)
+            if user is None:
+                user = form.save()
+            login(request, user)
+            redirect_to = '/'
+            return HttpResponseRedirect(redirect_to=redirect_to)
+    else:
+        raise HttpResponseForbidden
+    context = {'form': form}
+    return render(request=request, template_name='signup.html', context=context)
 
 
-def login(request):
-    ...
+def login_view(request):
+    if request.method == 'GET':
+        form = LoginForm()
+    elif request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.username, password=form.password)
+            if user is not None:
+                login(request, user)
+            redirect_to = '/'
+            return HttpResponseRedirect(redirect_to=redirect_to)
+    else:
+        raise HttpResponseForbidden
+    context = {'form': form}
+    return render(request=request, template_name='login.html', context=context)

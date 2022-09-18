@@ -1,5 +1,6 @@
 from django import forms
 from .models import Question, Answer
+from django.contrib.auth.models import User
 
 
 class AskForm(forms.Form):
@@ -32,3 +33,19 @@ class AnswerForm(forms.Form):
         answer = Answer(**self.cleaned_data)
         answer.save()
         return answer
+
+
+class SignUpForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    password = forms.PasswordInput()
+
+    def save(self):
+        user = User.objects.create_user(**self.cleaned_data)
+        resp = user.save()
+        return resp
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.PasswordInput()
