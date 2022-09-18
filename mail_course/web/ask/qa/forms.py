@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 from .models import Question, Answer
 from django.contrib.auth.models import User
@@ -41,6 +43,7 @@ class SignUpForm(forms.Form):
     password = forms.CharField()
 
     def save(self):
+        self.cleaned_data['last_login'] = datetime.datetime.now()
         user = User.objects.create_user(**self.cleaned_data)
         resp = user.save()
         return resp
