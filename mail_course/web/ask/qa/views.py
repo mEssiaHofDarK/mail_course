@@ -92,3 +92,10 @@ def ask(request):
     context = {'form': form}
     return render(request=request, template_name='ask.html', context=context)
 
+
+def signup(request):
+    ...
+
+
+def login(request):
+    ...
