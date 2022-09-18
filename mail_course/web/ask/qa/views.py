@@ -102,7 +102,7 @@ def signup(request):
     elif request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = authenticate(username=form.username, password=form.password)
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is None:
                 user = form.save()
             login(request, user)
