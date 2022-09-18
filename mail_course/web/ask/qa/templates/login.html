@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+{% csrf_token %}
+<body>
+    <form method="post" action="/login">
+        {% for field in form %}
+            <div class="control-group{% if field.errors %}has-error{% endif %}">
+                <label class="control-label">{{ field.label }}</label>
+                <div class="controls">{{ field }}</div>
+            </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Log in!</button>
+        </div>
+    </form>
+</body>
+</html>

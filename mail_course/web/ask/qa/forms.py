@@ -37,8 +37,8 @@ class AnswerForm(forms.Form):
 
 class SignUpForm(forms.Form):
     username = forms.CharField()
-    email = forms.EmailField()
-    password = forms.PasswordInput()
+    email = forms.CharField()
+    password = forms.CharField()
 
     def save(self):
         user = User.objects.create_user(**self.cleaned_data)
@@ -48,4 +48,5 @@ class SignUpForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField()
-    password = forms.PasswordInput()
+    password = forms.CharField()
+
